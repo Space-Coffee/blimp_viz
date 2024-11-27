@@ -3,7 +3,7 @@
 
     let { wsIface }: { wsIface: WebSocketIface } = $props();
 
-    let wsAddrCurr: string = "";
+    let wsAddrCurr = $state<string>("");
 </script>
 
 <div>
