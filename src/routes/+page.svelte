@@ -1,6 +1,7 @@
 <script lang="ts">
     import InterestConfig from "$lib/InterestConfig.svelte";
     import MotorsState from "$lib/MotorsState.svelte";
+    import ServosState from "$lib/ServosState.svelte";
     import webSocketTask from "$lib/websocket_comm";
     import WebSocketConfig from "$lib/WebSocketConfig.svelte";
 
@@ -14,3 +15,4 @@
 <InterestConfig {wsIface}></InterestConfig>
 
 <MotorsState {wsIface}></MotorsState>
+<ServosState {wsIface}></ServosState>

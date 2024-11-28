@@ -6,6 +6,7 @@ function webSocketTask(): WebSocketIface {
     let webSocket: WebSocket | null = null
 
     let motorsSpeedsListeners: ((ms: MotorsSpeeds) => void)[] = []
+    let servosAnglesListeners: ((sa: ServosAngles) => void)[] = []
 
     function webSocketUpdate() {
         if (webSocket?.url != webSocketAddr) {
@@ -20,6 +21,13 @@ function webSocketTask(): WebSocketIface {
                     console.log("motorsSpeeds: ", motorsSpeeds)
                     for (const listener of motorsSpeedsListeners) {
                         listener(motorsSpeeds)
+                    }
+                }
+                else if (msgObj.ServoPosition != null) {
+                    let servosAngles: ServosAngles = msgObj.ServoPosition as ServosAngles
+                    console.log("servosAngles: ", servosAngles)
+                    for (const listener of servosAnglesListeners) {
+                        listener(servosAngles)
                     }
                 }
             })
@@ -38,6 +46,9 @@ function webSocketTask(): WebSocketIface {
         declareInterest: declareInterest,
         subscribeMotorsSpeeds: (listener: (ms: MotorsSpeeds) => void) => {
             motorsSpeedsListeners.push(listener)
+        },
+        subscribeServosAngles: (listener: (sa: ServosAngles) => void) => {
+            servosAnglesListeners.push(listener)
         }
     }
 }
@@ -45,7 +56,8 @@ function webSocketTask(): WebSocketIface {
 interface WebSocketIface {
     updateWSAddr: (addr: string) => void,
     declareInterest: (interest: VizInterest) => void,
-    subscribeMotorsSpeeds: (listener: (ms: MotorsSpeeds) => void) => void
+    subscribeMotorsSpeeds: (listener: (ms: MotorsSpeeds) => void) => void,
+    subscribeServosAngles: (listener: (sa: ServosAngles) => void) => void
 }
 
 interface VizInterest {
@@ -56,6 +68,11 @@ interface VizInterest {
 interface MotorsSpeeds {
     id: number,
     speed: number
+}
+
+interface ServosAngles {
+    id: number,
+    angle: number
 }
 
 export default webSocketTask

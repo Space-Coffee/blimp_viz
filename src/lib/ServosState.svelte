@@ -4,28 +4,26 @@
 
     let { wsIface }: { wsIface: WebSocketIface } = $props();
 
-    let motorsSpeeds = $state(new SvelteMap<number, number>());
-    wsIface.subscribeMotorsSpeeds((ms) => {
-        motorsSpeeds.set(ms.id, ms.speed);
-        motorsSpeeds = motorsSpeeds;
-        console.log(motorsSpeeds);
+    let servosAngles = $state(new SvelteMap<number, number>());
+    wsIface.subscribeServosAngles((sa) => {
+        servosAngles.set(sa.id, sa.angle);
     });
 </script>
 
 <div>
-    <h2>Motors state</h2>
+    <h2>Servos state</h2>
 
     <table>
         <tbody>
-            {#each motorsSpeeds as [motorId, motorSpeed]}
+            {#each servosAngles as [servoId, servoAngle]}
                 <tr>
-                    <td class="motors-c1">{motorId}</td>
-                    <td class="motors-c2">{motorSpeed}</td>
-                    <td class="motors-c3">
+                    <td class="servos-c1">{servoId}</td>
+                    <td class="servos-c2">{servoAngle}</td>
+                    <td class="servos-c3">
                         <input
                             type="range"
                             disabled
-                            value={motorSpeed}
+                            value={servoAngle}
                             min="-32768"
                             max="32767"
                         />
@@ -37,10 +35,10 @@
 </div>
 
 <style>
-    .motors-c1 {
+    .servos-c1 {
         width: 40px;
     }
-    .motors-c2 {
+    .servos-c2 {
         width: 100px;
     }
 </style>
