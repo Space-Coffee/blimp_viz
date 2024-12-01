@@ -5,8 +5,10 @@ function webSocketTask(): WebSocketIface {
     let webSocketAddr: string | null = null
     let webSocket: WebSocket | null = null
 
+    // TODO: Deal with destruction of listeners
     let motorsSpeedsListeners: ((ms: MotorsSpeeds) => void)[] = []
     let servosAnglesListeners: ((sa: ServosAngles) => void)[] = []
+    let sensorsReadingsListeners: ((sr: SensorsReadings) => void)[] = []
 
     function webSocketUpdate() {
         if (webSocket?.url != webSocketAddr) {
@@ -30,6 +32,13 @@ function webSocketTask(): WebSocketIface {
                         listener(servosAngles)
                     }
                 }
+                else if (msgObj.SensorData) {
+                    let sensorsReadings = msgObj.SensorData as SensorsReadings
+                    console.log("sensorsReadings: ", sensorsReadings)
+                    for (const listener of sensorsReadingsListeners) {
+                        listener(sensorsReadings)
+                    }
+                }
             })
         }
     }
@@ -38,7 +47,9 @@ function webSocketTask(): WebSocketIface {
         webSocketUpdate()
     }
     let declareInterest = (interest: VizInterest) => {
-        webSocket?.send(JSON.stringify({ DeclareInterest: { motors: interest.motors, servos: interest.servos } }))
+        webSocket?.send(JSON.stringify({
+            DeclareInterest: interest
+        }))
     }
 
     return {
@@ -49,6 +60,9 @@ function webSocketTask(): WebSocketIface {
         },
         subscribeServosAngles: (listener: (sa: ServosAngles) => void) => {
             servosAnglesListeners.push(listener)
+        },
+        subscribeSensorsReadings: (listener: (sr: SensorsReadings) => void) => {
+            sensorsReadingsListeners.push(listener)
         }
     }
 }
@@ -57,12 +71,14 @@ interface WebSocketIface {
     updateWSAddr: (addr: string) => void,
     declareInterest: (interest: VizInterest) => void,
     subscribeMotorsSpeeds: (listener: (ms: MotorsSpeeds) => void) => void,
-    subscribeServosAngles: (listener: (sa: ServosAngles) => void) => void
+    subscribeServosAngles: (listener: (sa: ServosAngles) => void) => void,
+    subscribeSensorsReadings: (listener: (sr: SensorsReadings) => void) => void,
 }
 
 interface VizInterest {
     motors: boolean,
-    servos: boolean
+    servos: boolean,
+    sensors: boolean,
 }
 
 interface MotorsSpeeds {
@@ -73,6 +89,11 @@ interface MotorsSpeeds {
 interface ServosAngles {
     id: number,
     angle: number
+}
+
+interface SensorsReadings {
+    id: string,
+    data: number,
 }
 
 export default webSocketTask

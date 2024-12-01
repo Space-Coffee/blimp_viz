@@ -3,10 +3,12 @@
 
     let currInterestMotors = $state<boolean>();
     let currInterestServos = $state<boolean>();
+    let currInterestSensors = $state<boolean>();
 
     let currInterest: VizInterest = $derived({
         motors: currInterestMotors!,
         servos: currInterestServos!,
+        sensors: currInterestSensors!,
     });
 
     let { wsIface }: { wsIface: WebSocketIface } = $props();
@@ -27,6 +29,13 @@
         bind:checked={currInterestServos}
     />
     <label for="interest-servos">Servos</label><br />
+    <input
+        type="checkbox"
+        id="interest-sensors"
+        bind:checked={currInterestSensors}
+    />
+    <label for="interest-sensors">Sensors</label><br />
+
     <button
         onclick={() => {
             wsIface.declareInterest(currInterest);
