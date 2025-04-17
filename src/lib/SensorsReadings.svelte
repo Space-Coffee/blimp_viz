@@ -1,15 +1,5 @@
 <script lang="ts">
-    import type { WebSocketIface } from "./websocket_comm";
-    import { SvelteMap } from "svelte/reactivity";
-
-    let { wsIface }: { wsIface: WebSocketIface } = $props();
-
-    let sensorsReadings = $state(new SvelteMap<string, number>());
-    wsIface.subscribeSensorsReadings((sr) => {
-        sensorsReadings.set(sr.id, sr.data);
-        sensorsReadings = sensorsReadings;
-        console.log(sr);
-    });
+import {sensors} from "$lib/blimp-state.svelte";
 </script>
 
 <div>
@@ -17,7 +7,7 @@
 
     <table>
         <tbody>
-            {#each sensorsReadings as [sensorId, sensorData]}
+            {#each sensors as [sensorId, sensorData]}
                 <tr>
                     <td>{sensorId}</td>
                     <td>{sensorData}</td>

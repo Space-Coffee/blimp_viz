@@ -1,13 +1,5 @@
 <script lang="ts">
-    import type { WebSocketIface } from "./websocket_comm";
-    import { SvelteMap } from "svelte/reactivity";
-
-    let { wsIface }: { wsIface: WebSocketIface } = $props();
-
-    let servosAngles = $state(new SvelteMap<number, number>());
-    wsIface.subscribeServosAngles((sa) => {
-        servosAngles.set(sa.id, sa.angle);
-    });
+import {servos} from "$lib/blimp-state.svelte";
 </script>
 
 <div>
@@ -15,7 +7,7 @@
 
     <table>
         <tbody>
-            {#each servosAngles as [servoId, servoAngle]}
+            {#each servos as [servoId, servoAngle]}
                 <tr>
                     <td class="servos-c1">{servoId}</td>
                     <td class="servos-c2">{servoAngle}</td>

@@ -1,21 +1,18 @@
 <script lang="ts">
-    import InterestConfig from "$lib/InterestConfig.svelte";
-    import MotorsState from "$lib/MotorsState.svelte";
-    import SensorsReadings from "$lib/SensorsReadings.svelte";
-    import ServosState from "$lib/ServosState.svelte";
-    import webSocketTask from "$lib/websocket_comm";
-    import WebSocketConfig from "$lib/WebSocketConfig.svelte";
-
-    let wsIface = webSocketTask();
+import WebSocketConfig from "$lib/WebSocketConfig.svelte";
+import ServosState from "$lib/ServosState.svelte";
+import MotorsState from "$lib/MotorsState.svelte";
+import SensorsReadings from "$lib/SensorsReadings.svelte";
+import InterestConfig from "$lib/InterestConfig.svelte";
 </script>
 
-<h1>Blimp Vizualizer</h1>
+<h1>Blimp Visualizer</h1>
 
-<WebSocketConfig {wsIface}></WebSocketConfig>
+<WebSocketConfig></WebSocketConfig>
 
-<InterestConfig {wsIface}></InterestConfig>
+<InterestConfig></InterestConfig>
 
-<MotorsState {wsIface}></MotorsState>
-<ServosState {wsIface}></ServosState>
+<MotorsState></MotorsState>
+<ServosState></ServosState>
 
-<SensorsReadings {wsIface}></SensorsReadings>
+<SensorsReadings></SensorsReadings>
