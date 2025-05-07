@@ -47,7 +47,7 @@ export class WebSocketManager {
     async connect(address: string) {
         if (this.connected) { throw new Error("WebSocket is already connected") }
         this.webSocket = await new Promise((resolve, reject) => {
-            const webSocket = new WebSocket(`ws://${address}`)
+            const webSocket = new WebSocket(`ws://${address}`, ["spacecoffee.blimp.v1.json"])
             webSocket.onopen = () => {
                 resolve(webSocket)
             }
