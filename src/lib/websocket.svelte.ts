@@ -1,5 +1,5 @@
-import { type MessageG2V, MessageG2VSchema, type MessageV2G } from "$lib/schema";
-import { motors, sensors, servos } from "$lib/blimp-state.svelte";
+import { type MessageG2V, MessageG2VSchema, type MessageV2G, type BlimpState } from "$lib/schema";
+import { blimpStateAgg } from "$lib/blimp-state.svelte";
 
 
 export class WebSocketManager {
@@ -37,15 +37,19 @@ export class WebSocketManager {
 
 	protected handleMessage(message: MessageG2V) {
 		if ("MotorSpeed" in message) {
-			motors.set(message.MotorSpeed.id, message.MotorSpeed.speed)
+			blimpStateAgg.motors.set(message.MotorSpeed.id, message.MotorSpeed.speed)
 			return
 		}
 		if ("ServoPosition" in message) {
-			servos.set(message.ServoPosition.id, message.ServoPosition.angle)
+			blimpStateAgg.servos.set(message.ServoPosition.id, message.ServoPosition.angle)
 			return
 		}
 		if ("SensorData" in message) {
-			sensors.set(message.SensorData.id, message.SensorData.data)
+			blimpStateAgg.sensors.set(message.SensorData.id, message.SensorData.data)
+			return
+		}
+		if ("State" in message) {
+			blimpStateAgg.state = message.State as BlimpState
 			return
 		}
 	}

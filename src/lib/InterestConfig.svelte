@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { webSocketManager } from "$lib/websocket.svelte";
+	import { blimpStateAgg } from "$lib/blimp-state.svelte";
 
 	let interestMotors: boolean = $state(false);
 	let interestServos: boolean = $state(false);
@@ -16,6 +17,19 @@
 				state: interestState,
 			},
 		});
+
+		if (!interestMotors) {
+			blimpStateAgg.motors.clear();
+		}
+		if (!interestServos) {
+			blimpStateAgg.servos.clear();
+		}
+		if (!interestSensors) {
+			blimpStateAgg.sensors.clear();
+		}
+		if (!interestState) {
+			blimpStateAgg.state = null;
+		}
 	});
 </script>
 

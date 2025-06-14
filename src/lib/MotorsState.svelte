@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { motors } from "$lib/blimp-state.svelte";
+	import { blimpStateAgg } from "$lib/blimp-state.svelte";
 </script>
 
 <div>
@@ -7,7 +7,7 @@
 
 	<table>
 		<tbody>
-			{#each motors as [motorId, motorSpeed]}
+			{#each blimpStateAgg.motors as [motorId, motorSpeed]}
 				<tr>
 					<td class="motors-c1">{motorId}</td>
 					<td class="motors-c2">{motorSpeed}</td>
