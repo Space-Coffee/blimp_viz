@@ -24,11 +24,27 @@
 				</td>
 			</tr>
 			<tr>
+				<td> Desired altitude </td>
+				<td>
+					{blimpStateAgg.state == null
+						? "-"
+						: blimpStateAgg.state.desired_altitude}
+				</td>
+			</tr>
+			<tr>
 				<td> Heading </td>
 				<td>
 					{blimpStateAgg.state == null
 						? "-"
 						: blimpStateAgg.state.heading}
+				</td>
+			</tr>
+			<tr>
+				<td> Desired heading </td>
+				<td>
+					{blimpStateAgg.state == null
+						? "-"
+						: blimpStateAgg.state.desired_heading}
 				</td>
 			</tr>
 		</tbody>

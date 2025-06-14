@@ -31,7 +31,9 @@ export type SensorData = z.infer<typeof SensorDataSchema>
 export const BlimpStateSchema = z.object({
 	flight_mode: z.string(),
 	altitude: z.number().or(z.null()),
-	heading: z.number().or(z.null())
+	desired_altitude: z.number().or(z.null()),
+	heading: z.number().or(z.null()),
+	desired_heading: z.number().or(z.null()),
 })
 export type BlimpState = z.infer<typeof BlimpStateSchema>
 
