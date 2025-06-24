@@ -5,6 +5,7 @@
 	import SensorsReadings from "$lib/SensorsReadings.svelte";
 	import InterestConfig from "$lib/InterestConfig.svelte";
 	import StateView from "$lib/StateView.svelte";
+	import CesiumMapView from "$lib/CesiumMapView.svelte";
 </script>
 
 <h1>Blimp Visualizer</h1>
@@ -17,3 +18,5 @@
 <ServosState></ServosState>
 <SensorsReadings></SensorsReadings>
 <StateView></StateView>
+
+<CesiumMapView></CesiumMapView>
