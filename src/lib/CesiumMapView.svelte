@@ -7,23 +7,23 @@
 
 	let viewer: Cesium.Viewer;
 	onMount(() => {
-		window.CESIUM_BASE_URL = "./build";
-		/*Object.defineProperty(document, "CESIUM_BASE_URL", {
+		// window.CESIUM_BASE_URL = "./build";
+		Object.defineProperty(window, "CESIUM_BASE_URL", {
 			value: "build",
-		});*/
+		});
 
-		cesiumContainer.style.border = "5px solid red";
 		viewer = new Cesium.Viewer(cesiumContainer, {
-			// terrain: Cesium.Terrain.fromWorldTerrain(),
+			terrain: Cesium.Terrain.fromWorldTerrain(),
 			// terrainProvider: new Cesium.EllipsoidTerrainProvider({}),
-			// timeline: false,
-			// navigationHelpButton: false,
-			// geocoder: false,
-			/* baseLayer: new Cesium.ImageryLayer(
+			animation: false,
+			timeline: false,
+			navigationHelpButton: false,
+			geocoder: false,
+			baseLayer: new Cesium.ImageryLayer(
 				new Cesium.OpenStreetMapImageryProvider({
 					url: "https://tile.openstreetmap.org/",
 				}),
-			),*/
+			),
 		});
 	});
 </script>
