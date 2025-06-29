@@ -11,19 +11,19 @@ export default defineConfig({
 		viteStaticCopy({
 			targets: [
 				{
-					src: path.join(cesiumBuildPath, 'Assets'),
+					src: path.posix.join(cesiumBuildPath, 'Assets'),
 					dest: 'build'
 				},
 				{
-					src: path.join(cesiumBuildPath, 'ThirdParty'),
+					src: path.posix.join(cesiumBuildPath, 'ThirdParty'),
 					dest: 'build'
 				},
 				{
-					src: path.join(cesiumBuildPath, 'Widgets'),
+					src: path.posix.join(cesiumBuildPath, 'Widgets'),
 					dest: 'build'
 				},
 				{
-					src: path.join(cesiumBuildPath, 'Workers'),
+					src: path.posix.join(cesiumBuildPath, 'Workers'),
 					dest: 'build'
 				},
 			]
