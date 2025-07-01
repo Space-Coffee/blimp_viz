@@ -8,6 +8,7 @@
 	import CesiumMapView from "$lib/CesiumMapView.svelte";
     import HeadingIndicator from "$lib/instruments/heading/HeadingIndicator.svelte";
     import AttitudeIndicator from "$lib/instruments/attitude/AttitudeIndicator.svelte";
+    import VerticalSpeedIndicator from "$lib/instruments/vertical-speed/VerticalSpeedIndicator.svelte";
 </script>
 
 <h1>Blimp Visualizer</h1>
@@ -23,6 +24,7 @@
 
 <AttitudeIndicator pitch={0.0} roll={0.0}></AttitudeIndicator>
 <HeadingIndicator heading={0.0}></HeadingIndicator>
+<VerticalSpeedIndicator speed={0.0}></VerticalSpeedIndicator>
 
 
 <CesiumMapView></CesiumMapView>
