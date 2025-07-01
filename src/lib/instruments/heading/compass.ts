@@ -55,7 +55,6 @@ export function getCompassText(size: number, angle: number): Text {
     compass_text.pivot.set(compass_text.width / 2, compass_text.height / 2);
     compass_text.position.set(middle + x * middle - x * size * COMPASS_TEXT_MARGIN / 2, middle - y * middle + y * size * COMPASS_TEXT_MARGIN / 2);
     compass_text.rotation = angle;
-    console.log(compass_text.position)
 
     return compass_text;
 }
