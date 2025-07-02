@@ -1,12 +1,12 @@
 <script lang="ts">
     import {Application, Container} from 'pixi.js';
     import {onMount} from "svelte";
-    import {getNeedle, getStandardCompassRing} from "$lib/instruments/heading/compass";
+    import {getCompassNeedle, getStandardCompassRing} from "$lib/instruments/heading/compass";
 
     const app = new Application();
     let canvas: HTMLCanvasElement;
 
-    const compass: Container<any> = new Container();
+    const compass: Container = new Container();
 
     onMount(async () =>  {
         await app.init({
@@ -21,7 +21,7 @@
         compass.pivot.set(size / 2);
         compass.addChild(getStandardCompassRing(size));
         app.stage.addChild(compass);
-        app.stage.addChild(getNeedle(size));
+        app.stage.addChild(getCompassNeedle(size));
     })
 
     let { heading }: { heading: number } = $props();

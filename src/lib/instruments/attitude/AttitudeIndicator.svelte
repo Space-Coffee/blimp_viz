@@ -8,8 +8,8 @@
 
     const app = new Application();
     let canvas: HTMLCanvasElement;
-    let pitch_dependant: Container<any> = new Container();
-    let roll_dependant: Container<any> = new Container();
+    let pitch_dependant: Container = new Container();
+    let roll_dependant: Container = new Container();
 
     onMount(async () =>  {
         await app.init({

@@ -77,7 +77,7 @@ const NEEDLE_ICON_HEIGHT: number = 1/5;
 const NEEDLE_CROSS_SIZE: number = 1/2;
 const NEEDLE_CROSS_WIDTH: number = 1/150;
 
-export function getNeedle(size: number): Graphics {
+export function getCompassNeedle(size: number): Graphics {
     const needle = new Graphics();
     const middle = size / 2;
 

@@ -9,6 +9,8 @@
     import HeadingIndicator from "$lib/instruments/heading/HeadingIndicator.svelte";
     import AttitudeIndicator from "$lib/instruments/attitude/AttitudeIndicator.svelte";
     import VerticalSpeedIndicator from "$lib/instruments/vertical-speed/VerticalSpeedIndicator.svelte";
+    import Altimeter from "$lib/instruments/altitude/Altimeter.svelte";
+    import AirspeedIndicator from "$lib/instruments/airspeed/AirspeedIndicator.svelte";
 </script>
 
 <h1>Blimp Visualizer</h1>
@@ -25,6 +27,8 @@
 <AttitudeIndicator pitch={0.0} roll={0.0}></AttitudeIndicator>
 <HeadingIndicator heading={0.0}></HeadingIndicator>
 <VerticalSpeedIndicator speed={0.0}></VerticalSpeedIndicator>
+<Altimeter altitude={0.0}></Altimeter>
+<AirspeedIndicator speed={0.0}></AirspeedIndicator>
 
 
 <CesiumMapView></CesiumMapView>

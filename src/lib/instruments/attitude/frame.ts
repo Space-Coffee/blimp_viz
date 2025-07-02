@@ -38,7 +38,7 @@ export function getRollMark(size: number, angle: number): Graphics {
 export function getStandardRollMarks(size: number): Container<Graphics> {
     const container: Container<Graphics> = new Container();
     const angles = [
-        0 + ROLL_MARK_THICKNESS * 2,
+        ROLL_MARK_THICKNESS * 2,
         Math.PI / 18,
         Math.PI / 9,
         Math.PI / 6 + ROLL_MARK_THICKNESS,
