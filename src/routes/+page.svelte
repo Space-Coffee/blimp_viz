@@ -24,11 +24,4 @@
 <SensorsReadings></SensorsReadings>
 <StateView></StateView>
 
-<AttitudeIndicator pitch={0.0} roll={0.0}></AttitudeIndicator>
-<HeadingIndicator heading={0.0}></HeadingIndicator>
-<VerticalSpeedIndicator speed={0.0}></VerticalSpeedIndicator>
-<Altimeter altitude={0.0}></Altimeter>
-<AirspeedIndicator speed={0.0}></AirspeedIndicator>
-
-
 <CesiumMapView></CesiumMapView>

@@ -85,8 +85,8 @@ export function getAltitudeNeedle(size: number): Graphics {
 }
 
 
-export function setAltitudeMeterText(text: Text, speed: number) {
-    text.text = `${Math.abs(speed).toFixed(1)} m`;
+export function setAltitudeMeterText(text: Text, altitude: number) {
+    text.text = `${altitude.toFixed(1)} m`;
     text.pivot.set(text.width / 2, text.height / 2);
 }
 
