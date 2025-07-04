@@ -2,7 +2,7 @@
 	import { blimpStateAgg } from "$lib/blimp-state.svelte";
 	import HeadingIndicator from "$lib/instruments/heading/HeadingIndicator.svelte";
 	import Altimeter from "$lib/instruments/altitude/Altimeter.svelte";
-	import {Tween} from "svelte/motion";
+	import { Tween } from "svelte/motion";
 	import VerticalSpeedIndicator from "$lib/instruments/vertical-speed/VerticalSpeedIndicator.svelte";
 	import AirspeedIndicator from "$lib/instruments/airspeed/AirspeedIndicator.svelte";
 	import AttitudeIndicator from "$lib/instruments/attitude/AttitudeIndicator.svelte";
@@ -20,64 +20,71 @@
 		tween_heading.set(blimpStateAgg.state.altitude! * 2);
 		tween_vertical_speed.set(blimpStateAgg.state.altitude! * 10);
 		tween_speed.set(blimpStateAgg.state.altitude! * 15 + 3);
-		tween_pitch.set(blimpStateAgg.state.altitude! * 3);
-		tween_roll.set(blimpStateAgg.state.altitude! * 2.5);
-	})
+		tween_pitch.set(blimpStateAgg.state.pitch);
+		tween_roll.set(blimpStateAgg.state.roll);
+	});
 </script>
 
 <section>
-<h2>State view</h2>
-{#if blimpStateAgg.state == null}
-	State information unavailable
-{:else}
-	<p>Flight mode: {blimpStateAgg.state.flight_mode}</p>
-	<div id="instruments">
-		<div class="panel">
-			<h3>Heading Indicator</h3>
-			<div class="clock">
-				<HeadingIndicator heading={tween_heading.current} />
+	<h2>State view</h2>
+	{#if blimpStateAgg.state == null}
+		State information unavailable
+	{:else}
+		<p>Flight mode: {blimpStateAgg.state.flight_mode}</p>
+		<div id="instruments">
+			<div class="panel">
+				<h3>Heading Indicator</h3>
+				<div class="clock">
+					<HeadingIndicator heading={tween_heading.current} />
+				</div>
+				<p>
+					Auto:
+					{#if blimpStateAgg.state.desired_heading !== null}
+						{blimpStateAgg.state.desired_heading}
+					{:else}
+						OFF (use Atti or AltiAtti flight mode)
+					{/if}
+				</p>
 			</div>
-			<p>Auto:
-				{#if blimpStateAgg.state.desired_heading !== null}
-					{blimpStateAgg.state.desired_heading}
-				{:else}
-					OFF (use Atti or AltiAtti flight mode)
-				{/if}
-			</p>
-		</div>
-		<div class="panel">
-			<h3>Altimeter</h3>
-			<div class="clock">
-				<Altimeter altitude={tween_altitude.current} />
+			<div class="panel">
+				<h3>Altimeter</h3>
+				<div class="clock">
+					<Altimeter altitude={tween_altitude.current} />
+				</div>
+				<p>
+					Auto:
+					{#if blimpStateAgg.state.desired_altitude !== null}
+						{blimpStateAgg.state.desired_altitude}
+					{:else}
+						OFF (use AltiAtti flight mode)
+					{/if}
+				</p>
 			</div>
-			<p>Auto:
-				{#if blimpStateAgg.state.desired_altitude !== null}
-					{blimpStateAgg.state.desired_altitude}
-				{:else}
-					OFF (use AltiAtti flight mode)
-				{/if}
-			</p>
-		</div>
-		<div class="panel">
-			<h3>Vertical Speed Indicator</h3>
-			<div class="clock">
-				<VerticalSpeedIndicator speed={tween_vertical_speed.current} />
+			<div class="panel">
+				<h3>Vertical Speed Indicator</h3>
+				<div class="clock">
+					<VerticalSpeedIndicator
+						speed={tween_vertical_speed.current}
+					/>
+				</div>
+			</div>
+			<div class="panel">
+				<h3>Airspeed Indicator</h3>
+				<div class="clock">
+					<AirspeedIndicator speed={tween_speed.current} />
+				</div>
+			</div>
+			<div class="panel">
+				<h3>Attitude Indicator</h3>
+				<div class="clock">
+					<AttitudeIndicator
+						pitch={tween_pitch.current}
+						roll={tween_roll.current}
+					/>
+				</div>
 			</div>
 		</div>
-		<div class="panel">
-			<h3>Airspeed Indicator</h3>
-			<div class="clock">
-				<AirspeedIndicator speed={tween_speed.current} />
-			</div>
-		</div>
-		<div class="panel">
-			<h3>Attitude Indicator</h3>
-			<div class="clock">
-				<AttitudeIndicator pitch={tween_pitch.current} roll={tween_roll.current} />
-			</div>
-		</div>
-	</div>
-{/if}
+	{/if}
 </section>
 
 <style>

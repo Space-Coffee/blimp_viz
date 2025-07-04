@@ -34,6 +34,8 @@ export const BlimpStateSchema = z.object({
 	desired_altitude: z.number().or(z.null()),
 	heading: z.number().or(z.null()),
 	desired_heading: z.number().or(z.null()),
+	pitch: z.number(),
+	roll: z.number(),
 })
 export type BlimpState = z.infer<typeof BlimpStateSchema>
 
