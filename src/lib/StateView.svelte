@@ -16,10 +16,10 @@
 
 	$effect(() => {
 		if (blimpStateAgg.state === null) return;
-		tween_altitude.set(blimpStateAgg.state.altitude! * 100 + 20);
-		tween_heading.set(blimpStateAgg.state.altitude! * 2);
-		tween_vertical_speed.set(blimpStateAgg.state.altitude! * 10);
-		tween_speed.set(blimpStateAgg.state.altitude! * 15 + 3);
+		tween_altitude.set(blimpStateAgg.state.altitude);
+		tween_heading.set(blimpStateAgg.state.heading);
+		// tween_vertical_speed.set(blimpStateAgg.state.altitude! * 10);
+		// tween_speed.set(blimpStateAgg.state.altitude! * 15 + 3);
 		tween_pitch.set(blimpStateAgg.state.pitch);
 		tween_roll.set(blimpStateAgg.state.roll);
 	});
@@ -67,12 +67,14 @@
 						speed={tween_vertical_speed.current}
 					/>
 				</div>
+				<p>WIP</p>
 			</div>
 			<div class="panel">
 				<h3>Airspeed Indicator</h3>
 				<div class="clock">
 					<AirspeedIndicator speed={tween_speed.current} />
 				</div>
+				<p>WIP</p>
 			</div>
 			<div class="panel">
 				<h3>Attitude Indicator</h3>
