@@ -9,7 +9,7 @@
 
 	let tween_altitude = new Tween(0.0);
 	let tween_heading = new Tween(0.0);
-	let tween_vertical_speed = new Tween(0.0, {duration: 1000});
+	let tween_vertical_speed = new Tween(0.0, {duration: 3000});
 	let tween_roll = new Tween(0.0);
 	let tween_pitch = new Tween(0.0);
 	let tween_speed = new Tween(0.0);
@@ -20,16 +20,15 @@
 		if (blimpStateAgg.state === null) return;
 		let now = Date.now();
 		if (now - last_state_update > 50) {
-			tween_vertical_speed.set((blimpStateAgg.state.altitude * 100 - last_altitude)/(now - last_state_update)*1000);
+			tween_vertical_speed.set((blimpStateAgg.state.altitude - last_altitude)/(now - last_state_update)*1000);
 		}
 
 		tween_heading.set(blimpStateAgg.state.heading);
-		tween_altitude.set(blimpStateAgg.state.altitude * 100);
-		// tween_speed.set(blimpStateAgg.state.altitude! * 15 + 3);
+		tween_altitude.set(blimpStateAgg.state.altitude);
 		tween_pitch.set(blimpStateAgg.state.pitch);
 		tween_roll.set(blimpStateAgg.state.roll);
 		last_state_update = now;
-		last_altitude = blimpStateAgg.state.altitude * 100;
+		last_altitude = blimpStateAgg.state.altitude;
 	});
 </script>
 
@@ -75,7 +74,6 @@
 						speed={tween_vertical_speed.current}
 					/>
 				</div>
-				<p>WIP</p>
 			</div>
 			<div class="panel">
 				<h3>Airspeed Indicator</h3>
