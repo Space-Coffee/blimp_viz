@@ -15,13 +15,26 @@
 
 <h1>Blimp Visualizer</h1>
 
+<div>
 <WebSocketConfig></WebSocketConfig>
-
+</div>
+<div>
 <InterestConfig></InterestConfig>
+</div>
+<div>
+    <MotorsState></MotorsState>
+</div>
+<div>
+    <ServosState></ServosState>
+</div>
+<div>
+    <SensorsReadings></SensorsReadings>
+</div>
 
-<MotorsState></MotorsState>
-<ServosState></ServosState>
-<SensorsReadings></SensorsReadings>
 <StateView></StateView>
 
-<CesiumMapView></CesiumMapView>
+<style>
+    div {
+        display: inline-block;
+    }
+</style>
