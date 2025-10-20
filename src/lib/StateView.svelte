@@ -104,6 +104,10 @@
 </section>
 
 <style>
+	section {
+		background-color: black;
+		color: white;
+	}
 	div.clock {
 		flex: 1;
 		display: flex;
