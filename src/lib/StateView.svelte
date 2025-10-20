@@ -45,7 +45,7 @@
 	{#if blimpStateAgg.state == null}
 		State information unavailable
 	{:else}
-		<p>Flight mode: {blimpStateAgg.state.flight_mode}</p>
+		<h2 id="flight-mode">Flight mode: {blimpStateAgg.state.flight_mode}</h2>
 		<div id="instruments">
 			<div class="panel">
 				<h3>Heading Indicator</h3>
@@ -104,9 +104,6 @@
 </section>
 
 <style>
-	section {
-	}
-
 	div.clock {
 		flex: 1;
 		display: flex;
@@ -138,5 +135,10 @@
 
 	p.auto-value {
 		text-align: center;
+	}
+
+	h2#flight-mode {
+		text-align: center;
+		font-size: 36px;
 	}
 </style>
