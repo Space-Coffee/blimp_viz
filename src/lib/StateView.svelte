@@ -83,13 +83,13 @@
 					/>
 				</div>
 			</div>
-			<div class="panel">
-				<h3>Airspeed Indicator</h3>
-				<div class="clock">
-					<AirspeedIndicator speed={tween_speed.current} />
-				</div>
-				<p>WIP</p>
-			</div>
+<!--			<div class="panel">-->
+<!--				<h3>Airspeed Indicator</h3>-->
+<!--				<div class="clock">-->
+<!--					<AirspeedIndicator speed={tween_speed.current} />-->
+<!--				</div>-->
+<!--				<p>WIP</p>-->
+<!--			</div>-->
 			<div class="panel">
 				<h3>Attitude Indicator</h3>
 				<div class="clock">
@@ -124,7 +124,7 @@
 		display: flex;
 		color: white;
 		width: 100%;
-		height: 50vh;
+		height: 60vh;
 		overflow: hidden;
 	}
 
