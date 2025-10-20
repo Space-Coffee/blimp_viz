@@ -7,6 +7,7 @@
 	import AirspeedIndicator from "$lib/instruments/airspeed/AirspeedIndicator.svelte";
 	import AttitudeIndicator from "$lib/instruments/attitude/AttitudeIndicator.svelte";
 
+	let base_altitude: null | number = $state(null);
 	let tween_altitude = new Tween(0.0);
 	let tween_heading = new Tween(0.0);
 	let tween_vertical_speed = new Tween(0.0, {duration: 3000});
@@ -18,13 +19,20 @@
 
 	$effect(() => {
 		if (blimpStateAgg.state === null) return;
+		if (base_altitude === null) base_altitude = blimpStateAgg.state.altitude;
 		let now = Date.now();
-		if (now - last_state_update > 50) {
-			tween_vertical_speed.set((blimpStateAgg.state.altitude - last_altitude)/(now - last_state_update)*1000);
-		}
+		if (now - last_state_update < 50) { return; }
 
+		tween_vertical_speed.set((blimpStateAgg.state.altitude - last_altitude)/(now - last_state_update)*1000);
+		if (Math.abs(tween_heading.current - blimpStateAgg.state.heading) > Math.PI) {
+			if (tween_heading.current > blimpStateAgg.state.heading) {
+				tween_heading.set(tween_heading.current - Math.PI * 2, {delay: 0, duration: 0})
+			} else if (tween_heading.current < blimpStateAgg.state.heading) {
+				tween_heading.set(tween_heading.current + Math.PI * 2, {delay: 0, duration: 0})
+			}
+		}
 		tween_heading.set(blimpStateAgg.state.heading);
-		tween_altitude.set(blimpStateAgg.state.altitude);
+		tween_altitude.set(blimpStateAgg.state.altitude - base_altitude);
 		tween_pitch.set(blimpStateAgg.state.pitch);
 		tween_roll.set(blimpStateAgg.state.roll);
 		last_state_update = now;
@@ -44,10 +52,10 @@
 				<div class="clock">
 					<HeadingIndicator heading={tween_heading.current} />
 				</div>
-				<p>
+				<p class="auto-value">
 					Auto:
 					{#if blimpStateAgg.state.desired_heading !== null}
-						{blimpStateAgg.state.desired_heading}
+						{(Math.round(blimpStateAgg.state.desired_heading / (Math.PI * 2) * 360) % 360 + 360) % 360}&deg;
 					{:else}
 						OFF (use Atti or AltiAtti flight mode)
 					{/if}
@@ -58,10 +66,10 @@
 				<div class="clock">
 					<Altimeter altitude={tween_altitude.current} />
 				</div>
-				<p>
+				<p class="auto-value">
 					Auto:
 					{#if blimpStateAgg.state.desired_altitude !== null}
-						{blimpStateAgg.state.desired_altitude}
+						{Math.round(blimpStateAgg.state.desired_altitude)}m
 					{:else}
 						OFF (use AltiAtti flight mode)
 					{/if}
@@ -126,5 +134,9 @@
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
+	}
+
+	p.auto-value {
+		text-align: center;
 	}
 </style>
