@@ -4,7 +4,8 @@
     let address: string = $state("localhost:8765");
     let connecting: boolean = $state(false);
 
-    async function connect() {
+    async function connect(event: SubmitEvent) {
+        event.preventDefault()
         connecting = true
         await webSocketManager.connect(address).catch(() => {})
         connecting = false
